@@ -1,5 +1,10 @@
 # NoraMark_HTMLBook
 
+[<img src="https://secure.travis-ci.org/skoji/nora_mark_htmlbook.png" />](http://travis-ci.org/skoji/nora_mark_htmlbook)
+[<img src="https://coveralls.io/repos/skoji/nora_mark_htmlbook/badge.png" />](https://coveralls.io/r/skoji/nora_mark_htmlbook)
+[![Dependency Status](https://gemnasium.com/skoji/nora_mark_htmlbook.svg)](https://gemnasium.com/skoji/nora_mark_htmlbook)
+
+
 HTMLBook generator plugin for NoraMark
 
 ## Installation
