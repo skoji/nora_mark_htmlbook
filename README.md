@@ -23,7 +23,7 @@ Or install it yourself as:
 
 ## Usage
 
-### In your code
+### Explicitly load your code
 
 ```ruby
 require 'nora_mark'
