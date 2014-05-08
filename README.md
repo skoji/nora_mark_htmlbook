@@ -5,7 +5,7 @@
 [![Dependency Status](https://gemnasium.com/skoji/nora_mark_htmlbook.svg)](https://gemnasium.com/skoji/nora_mark_htmlbook)
 
 
-HTMLBook generator plugin for NoraMark
+[HTMLBook](https://github.com/oreillymedia/HTMLBook) generator plugin for [NoraMark](https://github.com/skoji/noramark)
 
 ## Installation
 
@@ -22,6 +22,34 @@ Or install it yourself as:
     $ gem install nora_mark_htmlbook
 
 ## Usage
+
+### In your code
+
+```ruby
+require 'nora_mark'
+require 'nora_mark_htmlbook'
+
+NoraMark::Extensions.register_generator(NoraMark::Htmlbook::Generator)
+puts NoraMark::Document.parse(markup_text).htmlbook
+```
+
+### Specify in frontmatter in the markup text
+
+```
+---
+title: document title
+generator: htmlbook
+---
+
+# Chapter 1
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  
+
+## Section 1
+
+Donec hendrerit tempor tellus. Donec pretium posuere tellus. Proin quam nisl, tincidunt et, mattis eget, convallis nec, purus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nulla posuere. Donec vitae dolor. Nullam tristique diam non turpis. Cras placerat accumsan nulla. Nullam rutrum. Nam vestibulum accumsan nisl.
+
+```
 
 ## Contributing
 
