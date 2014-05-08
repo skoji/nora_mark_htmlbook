@@ -115,6 +115,67 @@ EOF
                    ['p', 'Did you know that in Boston, they call it "soda", and in Chicago, they call it "pop"?']]]
                  )
       end
+      it 'generate admotions' do
+        text = <<EOF
+note(Helpful Info) {
+Please take note of this important information
+}
+warning {
+Make sure to get your AsciiDoc markup right!
+}
+EOF
+        parsed = NoraMark::Document.parse(text)
+        xhtml = parsed.htmlbook
+        body = Nokogiri::XML::Document.parse(xhtml).root.at_xpath('xmlns:body')
+        expect(body.selector_and_children)
+          .to eq(
+                 ["body[data-type='book']",
+                  ["div[data-type='note']",
+                   ['h1', 'Helpful Info'],
+                   ['p', 'Please take note of this important information']],
+                  ["div[data-type='warning']",
+                   ['p', 'Make sure to get your AsciiDoc markup right!']]]
+                 )
+      end
+      it 'generate example' do
+        text = <<EOF
+example(Hello World in Ruby) {
+  puts 'Hello, World'
+}
+
+EOF
+        parsed = NoraMark::Document.parse(text)
+        xhtml = parsed.htmlbook
+        body = Nokogiri::XML::Document.parse(xhtml).root.at_xpath('xmlns:body')
+        expect(body.selector_and_children)
+          .to eq(
+                 ["body[data-type='book']",
+                  ["div[data-type='example']",
+                   ['h1', 'Hello World in Ruby'],
+                   ['p', 'puts \'Hello, World\'']]]
+                 )
+      end
+      it 'generate code listing' do
+        text = <<EOF
+example(Hello World in Ruby) {
+code {//ruby
+puts 'Hello, World'
+//}
+}
+
+EOF
+        parsed = NoraMark::Document.parse(text)
+        xhtml = parsed.htmlbook
+        body = Nokogiri::XML::Document.parse(xhtml).root.at_xpath('xmlns:body')
+        expect(body.selector_and_children)
+          .to eq(
+                 ["body[data-type='book']",
+                  ["div[data-type='example']",
+                   ['h1', 'Hello World in Ruby'],
+                   ["pre.code-ruby[data-type='programlisting'][data-code-language='ruby']",
+                    "puts 'Hello, World'"]]]
+                 )
+      end
     end
   end
   describe 'declare generator in the frontmatter' do
