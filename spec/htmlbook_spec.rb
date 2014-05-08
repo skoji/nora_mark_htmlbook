@@ -178,6 +178,20 @@ EOF
       end
     end
     describe 'inline element' do
+      it 'generate strikethrough etc.' do
+        text = <<EOF
+Use your own data-type or class attributes for custom styling for formatting like [span[data-type:strikethrough]{strikethrough}]
+EOF
+        parsed = NoraMark::Document.parse(text)
+        xhtml = parsed.htmlbook
+        body = Nokogiri::XML::Document.parse(xhtml).root.at_xpath('xmlns:body')
+        expect(body.selector_and_children)
+          .to eq(
+                 ["body[data-type='book']",
+                  ["p", 'Use your own data-type or class attributes for custom styling for formatting like ',
+                   ["span[data-type='strikethrough']", 'strikethrough']]]
+                 )
+      end
       it 'generate footnote' do
         text = <<EOF
 Five out of every six people who try AsciiDoc prefer it to Markdown [footnote{Totally made-up statistic}]

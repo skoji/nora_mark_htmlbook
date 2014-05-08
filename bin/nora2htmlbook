@@ -1,0 +1,16 @@
+require 'nora_mark'
+require 'nokogiri'
+require 'optparse'
+require 'kconv'
+
+auto_convert_encode = false
+opt = OptionParser.new
+opt.on('--kconv') {
+  auto_convert_encode = true
+}
+
+args = opt.parse(ARGV)
+input = ARGF.read
+input = Kconv.toutf8(input) if auto_convert_encode
+NoraMark::Extensions.register_generator(:htmlbook)
+puts Nokogiri::XML(NoraMark::Document::parse(input).htmlbook, &:noblanks).to_xml
