@@ -23,6 +23,10 @@ Or install it yourself as:
 
 ## Usage
 
+### From command line
+
+    $ nora2htmlbook < text.nora > result.html
+
 ### Explicitly load your code
 
 ```ruby
