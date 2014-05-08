@@ -88,6 +88,11 @@ module NoraMark
             @node.name = 'pre'
           end
         end
+
+        modify 'footnote' do
+          @node.name = 'span'
+          @node.add_attr "data-type" => ['footnote']
+        end
       end
     end
   end

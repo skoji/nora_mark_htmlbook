@@ -177,6 +177,21 @@ EOF
                  )
       end
     end
+    describe 'inline element' do
+      it 'generate footnote' do
+        text = <<EOF
+Five out of every six people who try AsciiDoc prefer it to Markdown [footnote{Totally made-up statistic}]
+EOF
+        parsed = NoraMark::Document.parse(text)
+        xhtml = parsed.htmlbook
+        body = Nokogiri::XML::Document.parse(xhtml).root.at_xpath('xmlns:body')
+        expect(body.selector_and_children)
+          .to eq(
+                 ["body[data-type='book']",
+                  ["p", 'Five out of every six people who try AsciiDoc prefer it to Markdown ', ["span[data-type='footnote']", "Totally made-up statistic"]]]
+                 )
+      end
+    end
   end
   describe 'declare generator in the frontmatter' do
     before(:each) do
