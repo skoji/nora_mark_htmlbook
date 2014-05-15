@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{HTMLBook Generator plugin for NoraMark.}
   spec.description   = %q{HTMLBook Generator plugin for NoraMark.}
   spec.homepage      = ""
-  spec.license       = "MIT"
+  spec.license       = "BSD 3-Clause"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
